@@ -119,5 +119,27 @@ async def ingest_pathway(data: PathwayUpdate, db: Session = Depends(get_db)):
     db.commit()
     return {"status": "Live & DB Updated"}
 
+# --- TEMPORARY DB TEST ROUTE ---
+@app.get("/test-db-insert", tags=["System"])
+def test_insert(db: Session = Depends(get_db)):
+    try:
+        # Create a dummy profile
+        new_profile = models.Profile(
+            emailid="test@college.edu",
+            phoneNo=999991234,
+            name="College PC Test",
+            company_name="FleetSync Corp",
+            company_address="123 Tech Campus"
+        )
+        
+        # Add and commit
+        db.add(new_profile)
+        db.commit()
+        db.refresh(new_profile)
+        
+        return {"status": "Success!", "data_inserted": new_profile.name}
+    except Exception as e:
+        return {"status": "Error", "message": str(e)}
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

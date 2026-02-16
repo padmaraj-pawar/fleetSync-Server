@@ -100,5 +100,3 @@ Analysis reports are generated using FPDF in [`generate_pdf`](main.py). The endp
 ## Notes
 - This repository uses a simple SQLite backend for demonstration and local development. For production, replace `database.SQLALCHEMY_DATABASE_URL` with a production-grade RDBMS and add migrations.
 - Endpoints include placeholders and simplified logic intended as a scaffold for enterprise workflows.
-
-If you need the README adjusted (shorter/longer or with additional sections like deployment or tests), I can update it.
